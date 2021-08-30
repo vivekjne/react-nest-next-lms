@@ -2,13 +2,12 @@ import React from "react";
 import MaterialTable from "material-table";
 import Switch from "@material-ui/core/Switch";
 import { Link, useHistory } from "react-router-dom";
-
-import useCategories from "../../hooks/category/useCategories";
 import useRemoveCategory from "../../hooks/category/useRemoveCategory";
 import { useQueryClient } from "react-query";
+import useSubCategories from "../../hooks/subCategories/useSubCategories";
 
-const CategoryList = () => {
-  const { data, isLoading, isError, error } = useCategories();
+const SubCategoryList = () => {
+  const { data, isLoading, isError, error } = useSubCategories();
   const columns = Array.isArray(data);
   const removeMutation = useRemoveCategory();
   const queryClient = useQueryClient();
@@ -37,6 +36,7 @@ const CategoryList = () => {
             ),
           },
           { title: "Description", field: "description" },
+          { title: "Category", field: "category.name" },
 
           {
             field: "active",
@@ -50,16 +50,16 @@ const CategoryList = () => {
           },
         ]}
         data={data}
-        title="Categories"
+        title="Sub Categories"
         actions={[
           (rowData) => ({
             icon: "edit",
             iconProps: {
               color: "primary",
             },
-            tooltip: `Edit  Category ${rowData.name}`,
+            tooltip: `Edit  Sub category ${rowData.name}`,
             onClick: (event, rowData) =>
-              history.push("/categories/" + rowData.id),
+              history.push("/sub-categories/" + rowData.id),
           }),
 
           (rowData) => ({
@@ -67,13 +67,13 @@ const CategoryList = () => {
             iconProps: {
               color: "secondary",
             },
-            tooltip: "Delete Category",
+            tooltip: `Delete Sub category ${rowData.name}`,
             onClick: (event, rowData) => {
               window.confirm("You want to delete " + rowData.name);
               removeMutation.mutate(rowData.id, {
                 onSuccess: () => {
-                  queryClient.invalidateQueries("categories");
-                  history.push("/categories");
+                  queryClient.invalidateQueries("sub-categories");
+                  history.push("/sub-categories");
                 },
               });
             },
@@ -87,4 +87,4 @@ const CategoryList = () => {
   );
 };
 
-export default CategoryList;
+export default SubCategoryList;

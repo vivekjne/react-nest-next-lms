@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 
@@ -17,6 +17,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FolderIcon from "@material-ui/icons/Folder";
+
+import FolderShared from "@material-ui/icons/FolderTwoTone";
 
 const drawerWidth = 240;
 
@@ -60,19 +62,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const mainListItems = (
+export const mainListItems = (location: any) => (
   <div>
-    <ListItem button component={Link} to="/dashboard">
+    <ListItem
+      button
+      component={Link}
+      to="/dashboard"
+      selected={location.pathname.includes("dashboard")}
+    >
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button component={Link} to="/categories">
+    <ListItem
+      button
+      component={Link}
+      to="/categories"
+      selected={location.pathname.startsWith("/categories")}
+    >
       <ListItemIcon>
         <FolderIcon />
       </ListItemIcon>
       <ListItemText primary="Categories" />
+    </ListItem>
+
+    <ListItem
+      button
+      component={Link}
+      to="/sub-categories"
+      selected={location.pathname.startsWith("/sub-categories")}
+    >
+      <ListItemIcon>
+        <FolderShared />
+      </ListItemIcon>
+      <ListItemText primary="Sub Categories" />
     </ListItem>
   </div>
 );
@@ -87,7 +111,8 @@ const SidebarLayout = ({
   open,
 }: SidebarLayoutProps): JSX.Element => {
   const classes = useStyles();
-
+  const location = useLocation();
+  console.log({ location });
   return (
     <Drawer
       variant="permanent"
@@ -102,7 +127,7 @@ const SidebarLayout = ({
         </IconButton>
       </div>
       <Divider />
-      <List>{mainListItems}</List>
+      <List>{mainListItems(location)}</List>
     </Drawer>
   );
 };

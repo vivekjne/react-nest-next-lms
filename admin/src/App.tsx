@@ -7,6 +7,8 @@ import MainLayout from "./components/layout/MainLayout";
 import CategoryIndex from "./screens/Categories";
 import CategoryCreate from "./screens/Categories/create";
 import CategoryEdit from "./screens/Categories/edit";
+import SubCategoryIndex from "./screens/SubCategories";
+import SubCategoryCreate from "./screens/SubCategories/create";
 
 export const queryClient = new QueryClient();
 
@@ -26,6 +28,15 @@ function App() {
               <CategoryEdit />
             </Route>
           </Switch>
+
+          {/* Sub categories route */}
+          <Route exact path="/sub-categories">
+            <SubCategoryIndex />
+          </Route>
+
+          <Route exact path="/sub-categories/new">
+            <SubCategoryCreate />
+          </Route>
         </MainLayout>
       </Router>
 
