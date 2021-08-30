@@ -5,8 +5,9 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "./App.css";
 import MainLayout from "./components/layout/MainLayout";
 import CategoryIndex from "./screens/Categories";
+import CategoryCreate from "./screens/Categories/create";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
           <Switch>
             <Route exact path="/categories">
               <CategoryIndex />
+            </Route>
+            <Route exact path="/categories/new">
+              <CategoryCreate />
             </Route>
           </Switch>
         </MainLayout>

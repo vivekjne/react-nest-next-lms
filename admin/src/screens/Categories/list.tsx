@@ -1,11 +1,18 @@
 import React from "react";
 import MaterialTable from "material-table";
 import Switch from "@material-ui/core/Switch";
-import useCategories from "../../hooks/useCategories";
+import { useHistory } from "react-router-dom";
+
+import useCategories from "../../hooks/category/useCategories";
+import useRemoveCategory from "../../hooks/category/useRemoveCategory";
+import { useQueryClient } from "react-query";
 
 const CategoryList = () => {
   const { data, isLoading, isError, error } = useCategories();
   const columns = Array.isArray(data);
+  const removeMutation = useRemoveCategory();
+  const queryClient = useQueryClient();
+  const history = useHistory();
   return (
     <div style={{ maxWidth: "100%" }}>
       <MaterialTable
@@ -53,9 +60,15 @@ const CategoryList = () => {
               color: "secondary",
             },
             tooltip: "Delete Category",
-            onClick: (event, rowData) =>
-              alert("You want to delete " + rowData.name),
-            disabled: rowData.birthYear < 2000,
+            onClick: (event, rowData) => {
+              window.confirm("You want to delete " + rowData.name);
+              removeMutation.mutate(rowData.id, {
+                onSuccess: () => {
+                  queryClient.invalidateQueries("categories");
+                  history.push("/categories");
+                },
+              });
+            },
           }),
         ]}
         options={{
