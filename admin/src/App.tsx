@@ -6,6 +6,7 @@ import "./App.css";
 import MainLayout from "./components/layout/MainLayout";
 import CategoryIndex from "./screens/Categories";
 import CategoryCreate from "./screens/Categories/create";
+import CategoryEdit from "./screens/Categories/edit";
 
 export const queryClient = new QueryClient();
 
@@ -20,6 +21,9 @@ function App() {
             </Route>
             <Route exact path="/categories/new">
               <CategoryCreate />
+            </Route>
+            <Route path="/categories/:id">
+              <CategoryEdit />
             </Route>
           </Switch>
         </MainLayout>

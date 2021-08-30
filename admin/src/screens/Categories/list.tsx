@@ -46,14 +46,16 @@ const CategoryList = () => {
         data={data}
         title="Demo Title"
         actions={[
-          {
+          (rowData) => ({
             icon: "edit",
             iconProps: {
               color: "primary",
             },
-            tooltip: "Edit Category",
-            onClick: (event, rowData) => alert("You saved " + rowData.name),
-          },
+            tooltip: `Edit  Category ${rowData.name}`,
+            onClick: (event, rowData) =>
+              history.push("/categories/" + rowData.id),
+          }),
+
           (rowData) => ({
             icon: "delete",
             iconProps: {
