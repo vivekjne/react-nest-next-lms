@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 
-import CategoryList from "./list";
+import SubCategoryList from "./list";
 
 const useStyles = makeStyles((theme) => ({
   createBtnContainer: {
@@ -20,14 +20,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CategoryIndex = () => {
+const SubCategoryIndex = () => {
   const classes = useStyles();
   return (
     <>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item xs={6}>
           <Typography variant="h5" component="h2">
-            Categories List
+            Sub Categories List
           </Typography>
         </Grid>
         <Grid item xs={6}>
@@ -36,17 +36,17 @@ const CategoryIndex = () => {
               component={Link}
               variant="contained"
               color="primary"
-              to="/categories/new"
+              to="/sub-categories/new"
             >
-              Create Category
+              Create sub category
             </Button>
           </div>
         </Grid>
       </Grid>
       <Box mt={4} />
-      <CategoryList />
+      <SubCategoryList />
     </>
   );
 };
 
-export default CategoryIndex;
+export default SubCategoryIndex;

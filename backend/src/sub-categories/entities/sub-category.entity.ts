@@ -1,16 +1,15 @@
-import slugify from 'slugify';
-import { SubCategory } from '../../sub-categories/entities/sub-category.entity';
+import { Category } from '../../categories/entities/category.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity()
-export class Category {
+export class SubCategory {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -35,8 +34,13 @@ export class Category {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   updated: Date;
 
-  @OneToMany((type) => SubCategory, (subcategory) => subcategory.category)
-  subCategories: SubCategory[];
+  @ManyToOne(() => Category, (category) => category.subCategories, {
+    eager: true,
+  })
+  category: Category;
+
+  @Column()
+  categoryId: number;
 
   @BeforeUpdate()
   updateTimestamp() {
