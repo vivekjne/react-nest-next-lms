@@ -120,7 +120,7 @@ const SubCategoryCreate = () => {
                     rows={3}
                     required
                     id="subCategoryDescription"
-                    label="Category description"
+                    label="Sub Category description"
                     {...getFieldProps("subCategoryDescription")}
                     fullWidth
                   />
@@ -135,7 +135,7 @@ const SubCategoryCreate = () => {
                   <TextField
                     required
                     id="subCategoryImage"
-                    label="Category image url"
+                    label="Sub Category image url"
                     type="text"
                     {...getFieldProps("subCategoryImage")}
                     fullWidth

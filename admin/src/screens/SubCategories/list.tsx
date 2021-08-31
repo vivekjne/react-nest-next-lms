@@ -2,14 +2,14 @@ import React from "react";
 import MaterialTable from "material-table";
 import Switch from "@material-ui/core/Switch";
 import { Link, useHistory } from "react-router-dom";
-import useRemoveCategory from "../../hooks/category/useRemoveCategory";
 import { useQueryClient } from "react-query";
 import useSubCategories from "../../hooks/subCategories/useSubCategories";
+import useRemoveSubCategory from "../../hooks/subCategories/useRemoveSubCategory";
 
 const SubCategoryList = () => {
   const { data, isLoading, isError, error } = useSubCategories();
   const columns = Array.isArray(data);
-  const removeMutation = useRemoveCategory();
+  const removeMutation = useRemoveSubCategory();
   const queryClient = useQueryClient();
   const history = useHistory();
   return (
@@ -21,7 +21,7 @@ const SubCategoryList = () => {
             title: "Name",
             field: "name",
             render: (rowData: any) => (
-              <Link to={`/categories/${rowData.id}`}>{rowData.name}</Link>
+              <Link to={`/sub-categories/${rowData.id}`}>{rowData.name}</Link>
             ),
           },
           {
