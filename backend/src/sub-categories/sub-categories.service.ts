@@ -17,7 +17,10 @@ export class SubCategoriesService {
     private categoriesRepository: Repository<Category>,
   ) {}
 
-  async create(createSubCategoryDto: CreateSubCategoryDto) {
+  async create(
+    createSubCategoryDto: CreateSubCategoryDto,
+    file: Express.Multer.File,
+  ) {
     const slug = slugify(createSubCategoryDto.name, { lower: true });
     const categoryExists = await this.subCategoriesRepository.findOne({ slug });
     if (categoryExists) {
@@ -34,6 +37,7 @@ export class SubCategoriesService {
       this.subCategoriesRepository.create(createSubCategoryDto);
     newSubCategory.category = categoryData;
     newSubCategory.slug = slug;
+    newSubCategory.image = file.filename;
     return this.subCategoriesRepository.save(newSubCategory);
   }
 

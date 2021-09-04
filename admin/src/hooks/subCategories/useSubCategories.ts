@@ -7,7 +7,5 @@ const getSubCategories = async () => {
 };
 
 export default function useSubCategories() {
-  return useQuery("sub-categories", getSubCategories, {
-    staleTime: 5000 * 60,
-  });
+  return useQuery("sub-categories", getSubCategories);
 }

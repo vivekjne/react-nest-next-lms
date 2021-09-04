@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { CategoriesModule } from './categories/categories.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
-
+import { MulterModule } from '@nestjs/platform-express';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -12,6 +12,9 @@ import { SubCategoriesModule } from './sub-categories/sub-categories.module';
       database: './grocerydb.sql',
       autoLoadEntities: true,
       synchronize: true,
+    }),
+    MulterModule.register({
+      dest: './files',
     }),
     CategoriesModule,
     SubCategoriesModule,

@@ -29,7 +29,11 @@ const SubCategoryList = () => {
             title: "Image",
             render: (rowData: any) => (
               <img
-                src={rowData.image}
+                src={
+                  rowData?.image?.startsWith("http")
+                    ? rowData.image
+                    : `http://localhost:5000/${rowData.image}`
+                }
                 style={{ width: 120, height: "auto" }}
                 alt={rowData.name}
               />
