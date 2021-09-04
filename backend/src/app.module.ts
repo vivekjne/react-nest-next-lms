@@ -5,6 +5,8 @@ import { CategoriesModule } from './categories/categories.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SubCategoriesModule } from './sub-categories/sub-categories.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -18,6 +20,8 @@ import { MulterModule } from '@nestjs/platform-express';
     }),
     CategoriesModule,
     SubCategoriesModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

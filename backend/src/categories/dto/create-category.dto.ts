@@ -1,13 +1,13 @@
 import { IsNotEmpty, Length, Max, MaxLength } from 'class-validator';
 
 export class CreateCategoryDto {
-  // @IsNotEmpty()
-  // @MaxLength(30)
+  @IsNotEmpty()
+  @MaxLength(30)
   readonly name: string;
 
-  // @IsNotEmpty()
+  @IsNotEmpty()
   readonly description: string;
 
-  // @IsNotEmpty()
+  @IsNotEmpty()
   readonly active: boolean;
 }

@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { AnyFilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { Public } from 'src/auth/decorators/public.decorator';
 import { editFileName, imageFileFilter } from 'src/utils/file-uploading.utils';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -39,11 +40,13 @@ export class CategoriesController {
     return this.categoriesService.create(createCategoryDto, file);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.categoriesService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(+id);
