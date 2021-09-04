@@ -7,7 +7,5 @@ const getCategories = async () => {
 };
 
 export default function useCategories() {
-  return useQuery("categories", getCategories, {
-    staleTime: 5000 * 60,
-  });
+  return useQuery("categories", getCategories);
 }

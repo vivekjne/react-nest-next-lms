@@ -10,9 +10,6 @@ export class CreateSubCategoryDto {
   readonly description: string;
 
   @IsNotEmpty()
-  readonly image: string;
-
-  @IsNotEmpty()
   readonly active: boolean;
 
   @IsNotEmpty()
