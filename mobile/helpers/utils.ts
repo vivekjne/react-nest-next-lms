@@ -1,13 +1,7 @@
-import * as SecureStore from "expo-secure-store";
+import { Platform } from "react-native";
+import { LocalStorageHelper } from "./storage/LocalStorageHelper";
+import { SecureStorageHelper } from "./storage/SecureStorageHelper";
+import { StorageInterface } from "./storage/type";
 
-export async function saveToken(key: string, value: string) {
-  await SecureStore.setItemAsync(key, value);
-}
-export async function getTokenValue(key: string) {
-  let result = await SecureStore.getItemAsync(key);
-  return result;
-}
-
-export async function deleteToken(key: string) {
-  return SecureStore.deleteItemAsync(key);
-}
+export const storage: StorageInterface =
+  Platform.OS === "web" ? new LocalStorageHelper() : new SecureStorageHelper();

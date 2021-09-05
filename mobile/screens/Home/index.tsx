@@ -1,16 +1,18 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, Button, Heading } from "native-base";
 import React from "react";
+import { AuthContextDispatch } from "../../components/contexts/AuthContext";
 import { STORAGE_KEYS } from "../../helpers/constants";
-import { deleteToken, saveToken } from "../../helpers/utils";
+import { storage } from "../../helpers/utils";
 import { RootStackParamList } from "../../navigator";
 
 type HomeProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
 const Home = ({ navigation }: HomeProps) => {
+  const { signOut } = React.useContext(AuthContextDispatch);
+
   const handleLogout = async () => {
-    await deleteToken(STORAGE_KEYS.ACCESS_TOKEN);
-    navigation.replace("Login");
+    signOut();
   };
   return (
     <Box flex={1}>

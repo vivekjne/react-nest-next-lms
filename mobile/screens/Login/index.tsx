@@ -17,11 +17,13 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigator";
 import useLogin from "../../hooks/auth/useLogin";
 import { STORAGE_KEYS } from "../../helpers/constants";
-import { getTokenValue, saveToken } from "../../helpers/utils";
+import { storage } from "../../helpers/utils";
+import { AuthContextDispatch } from "../../components/contexts/AuthContext";
 
 type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
 
 export default function Login({ navigation }: LoginProps) {
+  const { signIn } = React.useContext(AuthContextDispatch);
   const { mutate, isLoading, data } = useLogin();
 
   const handleLogin = () => {
@@ -32,8 +34,7 @@ export default function Login({ navigation }: LoginProps) {
 
     mutate(loginData, {
       onSuccess: async ({ access_token }) => {
-        await saveToken(STORAGE_KEYS.ACCESS_TOKEN, access_token);
-        navigation.replace("Home");
+        signIn(access_token);
       },
     });
   };
