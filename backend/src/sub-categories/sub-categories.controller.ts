@@ -15,6 +15,7 @@ import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from 'src/utils/file-uploading.utils';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Controller('api/sub-categories')
 export class SubCategoriesController {
@@ -37,11 +38,13 @@ export class SubCategoriesController {
     return this.subCategoriesService.create(createSubCategoryDto, file);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.subCategoriesService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.subCategoriesService.findOne(+id);
