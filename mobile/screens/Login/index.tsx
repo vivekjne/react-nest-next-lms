@@ -11,13 +11,34 @@ import {
   VStack,
   Text,
   Center,
+  Spinner,
 } from "native-base";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigator";
+import useLogin from "../../hooks/auth/useLogin";
+import { STORAGE_KEYS } from "../../helpers/constants";
+import { storage } from "../../helpers/utils";
+import { AuthContextDispatch } from "../../components/contexts/AuthContext";
 
 type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
 
 export default function Login({ navigation }: LoginProps) {
+  const { signIn } = React.useContext(AuthContextDispatch);
+  const { mutate, isLoading, data } = useLogin();
+
+  const handleLogin = () => {
+    const loginData = {
+      email: "johndoe3@yopmail.com",
+      password: "password",
+    };
+
+    mutate(loginData, {
+      onSuccess: async ({ access_token }) => {
+        signIn(access_token);
+      },
+    });
+  };
+
   return (
     <Center safeArea flex={1} bgColor="white">
       <Box flex={1} p={2} w="90%">
@@ -50,8 +71,15 @@ export default function Login({ navigation }: LoginProps) {
               Forget Password
             </Link>
           </FormControl>
-          <Button colorScheme="cyan" _text={{ color: "white" }}>
-            Login
+          <Button
+            onPress={handleLogin}
+            colorScheme="cyan"
+            _text={{ color: "white" }}
+          >
+            <HStack>
+              <Text color="white">Login </Text>
+              {isLoading && <Spinner color="white" size="sm" />}
+            </HStack>
           </Button>
 
           <HStack justifyContent="center">
@@ -65,6 +93,7 @@ export default function Login({ navigation }: LoginProps) {
               Sign Up
             </Link>
           </HStack>
+          {data && <Text>{JSON.stringify(data)}</Text>}
         </VStack>
       </Box>
     </Center>
