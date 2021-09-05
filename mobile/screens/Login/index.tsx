@@ -16,14 +16,14 @@ import {
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigator";
 import useLogin from "../../hooks/auth/useLogin";
-import { STORAGE_KEYS } from "../../helpers/constants";
-import { storage } from "../../helpers/utils";
 import { AuthContextDispatch } from "../../components/contexts/AuthContext";
 
 type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
 
-export default function Login({ navigation }: LoginProps) {
+export default function Login({ navigation }: LoginProps): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { signIn } = React.useContext(AuthContextDispatch);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { mutate, isLoading, data } = useLogin();
 
   const handleLogin = () => {
@@ -33,7 +33,8 @@ export default function Login({ navigation }: LoginProps) {
     };
 
     mutate(loginData, {
-      onSuccess: async ({ access_token }) => {
+      onSuccess: ({ access_token }) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         signIn(access_token);
       },
     });
@@ -84,7 +85,7 @@ export default function Login({ navigation }: LoginProps) {
 
           <HStack justifyContent="center">
             <Text fontSize="sm" color="muted.700" fontWeight="400">
-              I'm a new user. {` `}
+              I&#39;m a new user.{" "}
             </Text>
             <Link
               _text={{ color: "cyan.500", bold: true, fontSize: "sm" }}

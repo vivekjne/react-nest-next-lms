@@ -18,7 +18,7 @@ import { RootStackParamList } from "../../navigator";
 
 type RegisterProps = NativeStackScreenProps<RootStackParamList, "Register">;
 
-export default function Register({ navigation }: RegisterProps) {
+export default function Register({ navigation }: RegisterProps): JSX.Element {
   return (
     <KeyboardAwareScrollView style={{ backgroundColor: "#fff" }}>
       <Box flex={1} p={2} w="90%" mx="auto">
@@ -87,7 +87,7 @@ export default function Register({ navigation }: RegisterProps) {
 
           <HStack justifyContent="center">
             <Text fontSize="sm" color="muted.700" fontWeight="400">
-              Returning user. {` `}
+              Returning user.{" "}
             </Text>
             <Link
               onPress={() => navigation.goBack()}

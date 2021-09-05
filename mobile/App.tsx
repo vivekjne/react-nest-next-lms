@@ -1,13 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { NativeBaseProvider, Box, Heading } from "native-base";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { NativeBaseProvider } from "native-base";
 import Navigator from "./navigator";
 import AuthProvider from "./components/contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

@@ -2,16 +2,16 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, Button, Heading } from "native-base";
 import React from "react";
 import { AuthContextDispatch } from "../../components/contexts/AuthContext";
-import { STORAGE_KEYS } from "../../helpers/constants";
-import { storage } from "../../helpers/utils";
 import { RootStackParamList } from "../../navigator";
 
 type HomeProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
 const Home = ({ navigation }: HomeProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { signOut } = React.useContext(AuthContextDispatch);
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     signOut();
   };
   return (

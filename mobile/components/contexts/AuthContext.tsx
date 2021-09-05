@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as React from "react";
 import { STORAGE_KEYS } from "../../helpers/constants";
 import { storage } from "../../helpers/utils";
@@ -10,12 +12,16 @@ type AuthProviderProps = {
 };
 
 export default function AuthProvider({ children }: AuthProviderProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [state, dispatch] = React.useReducer(
     (prevState: any, action: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       switch (action.type) {
         case "RESTORE_TOKEN":
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return {
             ...prevState,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             userToken: action.token,
             isLoading: false,
           };
@@ -24,6 +30,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
           return {
             ...prevState,
             isSignout: false,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             userToken: action.token,
           };
         case "SIGN_OUT":
@@ -47,16 +54,20 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
       try {
         userToken = await storage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
 
       dispatch({ type: "RESTORE_TOKEN", token: userToken });
     };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     bootstrapAsync();
   }, []);
 
   const authContext = React.useMemo(
     () => ({
       signIn: async (token: string) => {
+        // eslint-disable-next-line @typescript-eslint/await-thenable
         await storage.saveItem(STORAGE_KEYS.ACCESS_TOKEN, token);
         dispatch({ type: "SIGN_IN", token });
       },
