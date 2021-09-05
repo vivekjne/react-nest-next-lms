@@ -5,8 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import { storage } from "../helpers/utils";
-import { STORAGE_KEYS } from "../helpers/constants";
 import Home from "../screens/Home";
 import { AuthContextValue } from "../components/contexts/AuthContext";
 
