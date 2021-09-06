@@ -56,7 +56,6 @@ function Navigator() {
           <>
             <Stack.Screen
               options={{
-                headerTitle: "",
                 headerShadowVisible: false,
               }}
               name="Home"

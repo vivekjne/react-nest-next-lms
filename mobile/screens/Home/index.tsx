@@ -1,8 +1,18 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Box, Button, Heading } from "native-base";
+import {
+  Box,
+  Button,
+  Center,
+  Heading,
+  Text,
+  ScrollView,
+  View,
+} from "native-base";
 import React from "react";
+
 import { AuthContextDispatch } from "../../components/contexts/AuthContext";
 import { RootStackParamList } from "../../navigator";
+import CategoryList from "./CategoryList";
 
 type HomeProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -15,12 +25,9 @@ const Home = ({ navigation }: HomeProps) => {
     signOut();
   };
   return (
-    <Box flex={1}>
-      <Heading>Home</Heading>
-      <Button mx={4} onPress={handleLogout}>
-        Logout
-      </Button>
-    </Box>
+    <View flex={1} w={"100%"} px={4}>
+      <CategoryList />
+    </View>
   );
 };
 
